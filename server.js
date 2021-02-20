@@ -4,9 +4,10 @@ const Messages = require("./models/dbMessages");
 const Rooms = require("./models/rooms");
 const Pusher = require("pusher");
 const cors = require("cors");
+const path = require("path");
 
 const connection_url =
-  process.env.MONGO_URI ||
+  process.env.MONGODB_URI ||
   "mongodb+srv://admin:JtOIOvaXD9iEiSdD@cluster0.j6n9y.mongodb.net/whatsappdb?retryWrites=true&w=majority";
 const pusher = new Pusher({
   appId: "1158221",
@@ -121,6 +122,9 @@ app.post("/rooms/new", (req, res) => {
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+  app.get("*", (res, req) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
 }
 
 app.listen(port, () => console.log(`Listening on localhost:${port}`));
