@@ -53,8 +53,6 @@ const port = process.env.PORT || 9000;
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => res.status(200).send("hello world"));
-
 app.get("/rooms/:id/messages/sync", (req, res) => {
   Rooms.findById(req.params.id, (err, room) => {
     if (err) res.status(500).send(err);
