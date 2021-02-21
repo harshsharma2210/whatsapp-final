@@ -17,7 +17,7 @@ function Sidebar() {
     axios.get("/rooms/sync").then((response) => {
       setRooms(response.data);
     });
-  }, [rooms]);
+  }, []);
   return (
     <div className="sidebar">
       <div className="sidebar__header">
